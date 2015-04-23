@@ -1,0 +1,16 @@
+ionic start %nombre% tipo(blank,tabs)
+(entrar el directorio, instalar plataforma)
+ionic platform android
+(compilar)
+ionic build android
+(ver en navegador)
+ionic serve
+(ver en celu)
+ionic run android -l -c -s
+(gg)
+
+(instalar pluying) 
+cordova pluying add %nombre% 
+
+
+code.requies.cl

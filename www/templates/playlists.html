@@ -1,0 +1,24 @@
+<ion-view view-title="Rutina de ejercicios">
+  <ion-content>
+    <ion-list>
+      <div ng-repeat="ejercicio in listaEjercicios" ng-if="ejercicio.tipo != 1">
+        <ion-item class="item-stable"
+                  ng-click="toggleGroup(ejercicio)"
+                  ng-class="{active: isGroupShown(ejercicio)}">
+            <i class="icon" ng-class="isGroupShown(ejercicio) ? 'ion-minus' : 'ion-plus'"></i>
+          &nbsp;
+          Ejercicio {{ejercicio.nombre}}
+        </ion-item>
+        <ion-item class="item-accordion" ng-show="isGroupShown(ejercicio)">
+          Sensibilidad sensor: {{ejercicio.parametros.sensibilidad}}
+        </ion-item>
+
+         <ion-item class="item-accordion" ng-show="isGroupShown(ejercicio)"> 
+             <span ng-if="ejercicio.parametros.tiempo==0">Tiempo: Sin limite </span>
+             <span ng-if="ejercicio.parametros.tiempo>0">Tiempo: {{ejercicio.parametros.tiempo}} </span>
+        </ion-item> 
+      </div>
+    </ion-list>
+    <button class="button button-full button-energized" ng-click="comenzar()" >Comenzar </button> 
+  </ion-content>
+</ion-view>
