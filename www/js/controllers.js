@@ -14,7 +14,10 @@ angular.module('starter.controllers',['ionic'])
             });
         });
     }
-
+    $scope.loginDemo = function() {
+            $usuario = 1;
+            $state.go('app.playlists');
+    }
 })
 
 .controller('AppCtrl', function($scope, $ionicModal, $timeout,$state) {
@@ -23,6 +26,7 @@ angular.module('starter.controllers',['ionic'])
     else{
       $state.go('login');      
     }
+    $scope.porcentaje=50;
 })
 
 .controller('PlaylistsCtrl', function($scope, $stateParams,$state,$ionicPopup) {
@@ -68,11 +72,12 @@ angular.module('starter.controllers',['ionic'])
 .controller('ejercicioTemblorInstancia', function($scope, $stateParams,$state) {
    $scope.iniciar = function(){
      preparacion();
-     cuentaAtras($scope,6);     
+     cuentaAtras($scope,5);     
    }
    $scope.comenzar = function(){
       gelak($state);
       cronometro($scope,$listaEjercicios[$numEjercicio].parametros.tiempo);
+   //cronometro($scope,2);
    }
    $scope.continuar = function(){
      stopgelak();
@@ -122,6 +127,10 @@ angular.module('starter.controllers',['ionic'])
 })
 
 .controller('noEjercicios', function($scope, $stateParams,$state) {
+   $scope.continuar = function(){
+      $state.go('app.playlists');
+  }
+
 });
 
 calculaRuta= function($state){

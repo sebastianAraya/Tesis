@@ -2,8 +2,6 @@
 
     var goya = null;
     var posicion = new Object();
-    posicion.x= 50;
-    posicion.y= 50;
     sensivilidad = 1.3;
     aceleracionGravedad=0;
     var valorCirculoExterior = 0.3;
@@ -11,6 +9,8 @@
     $iterador=0;
 
     function preparacion(){
+        posicion.x= 50;
+        posicion.y= 50;
         $iterador=0;
         var circuloExterior = document.getElementById('circuloExterior');
         ancho = window.innerWidth;

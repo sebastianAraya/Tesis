@@ -1,5 +1,7 @@
 <ion-view view-title="Cuestionario" >
-  <ion-content>
+  <ion-content style="background-image:url('img/fondoApp.jpg');
+  background-size: cover;
+  ">
     <h3 class="text-center" style="padding: 20px"> Antes de comenzar responda estas preguntas </h3>
 
   	<div class="card">
@@ -12,8 +14,9 @@
 	  </div>
 	</div>
 
-
-    <button class="button button-full button-energized" ng-click="terminar();" >Continuar </button>  
+<div class="text-right padding">
+    <a class="button button-energized icon-right ion-chevron-right button-calm" style="color: #000;"ng-click="terminar();"> Comenzar </a>
+    </div>
 
   </ion-content>
 </ion-view>

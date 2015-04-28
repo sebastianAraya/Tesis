@@ -53,7 +53,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   })
     .state('app.playlists', {
       cache: false,
-      url: "/playlists",
+      url: "/rutinaEjercicios",
       views: {
         'menuContent': {
           templateUrl: "templates/playlists.html",
@@ -114,6 +114,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   })
   ;
   //$urlRouterProvider.otherwise('/login');
-  $urlRouterProvider.otherwise('/app/playlists');
+  $urlRouterProvider.otherwise('/app/rutinaEjercicios');
 
 })

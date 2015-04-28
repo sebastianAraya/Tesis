@@ -45,7 +45,7 @@ $listaEjercicios = new Array();
 
   ejercicio.parametros = new Object();
   ejercicio.parametros.sensibilidad = 1;
-  ejercicio.parametros.tiempo = 15; 
+  ejercicio.parametros.tiempo = 30; 
   ejercicio.parametros.tolerancia = 30;
 
   ejercicio.datos = new Object();
@@ -67,7 +67,7 @@ $listaEjercicios = new Array();
 
   ejercicio.parametros = new Object();
   ejercicio.parametros.sensibilidad = 1;
-  ejercicio.parametros.tiempo = 7; 
+  ejercicio.parametros.tiempo = 5; 
   ejercicio.parametros.tolerancia = 30;
 
   ejercicio.datos = new Object();

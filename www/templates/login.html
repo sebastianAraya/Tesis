@@ -1,14 +1,17 @@
-<ion-view view-title="Ingresar" name="login-view">
-  <ion-content class="padding">
-      <div class="list list-inset">
-          <label class="item item-input">
-              <input type="text" placeholder="Usuario" ng-model="data.username">
-          </label>
-          <label class="item item-input">
-              <input type="password" placeholder="Contraseña" ng-model="data.password">
-          </label>
-      </div>
-      <button class="button button-block button-calm" ng-click="login()">Ingresar</button>
-      <h3> usuario = a, contraseña = a; </h3>
+<ion-content id="asdf" class="login-fondo" style="background-image:url('img/fondoLogin.png');
+    background-repeat:no-repeat;background-size:100% 100%;">
+    <img src="img/logo.png" style="max-width: 70%;padding-left: 7%;padding-top: 14px;"/>
+
+    <div style="  -moz-border-radius: 7px;-webkit-border-radius: 7px;padding: 10px;margin: 10px 5%;
+  background-color: rgba(255, 255, 255, .35);">
+      <h2 class="text-center padding" style="color: #fff">Iniciar Sesión</h2>
+        <input type="text" placeholder="Usuario" ng-model="data.username" >
+        <input type="password" placeholder="Contraseña" ng-model="data.password">
+        <div style="  text-align: right; padding-bottom: 6px; padding-right: 10%;" >
+          <button style="" class="button button-energized" ng-click="login()">Ingresar</button>
+        </div>
+    </div>
   </ion-content>
-</ion-view>
+<div class="bar bar-footer bar-outline" style="background-color: rgba(255, 255, 255, 0.1);">
+  <div class="title"><a href="#" ng-click="loginDemo()">DEMO</a> </div>
+</div>
