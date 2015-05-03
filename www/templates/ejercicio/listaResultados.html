@@ -1,0 +1,45 @@
+<ion-view view-title="">
+  <ion-content style="background-image:url('img/fondoApp.jpg');
+  background-size: cover;
+  ">
+    <h2 class="text-center padding">Resultados</h2>
+	<div style="  -moz-border-radius: 7px;-webkit-border-radius: 7px;padding: 10px;margin: 15px 5%;
+  background-color: rgba(255, 255, 255, .35);">   
+ <br />
+ <div class="item item-divider item-positive">
+    Resultados de la búsqueda
+  </div>
+
+
+	<ion-list>
+      <div ng-repeat="ejercicio in listaEjercicios" ng-if="ejercicio.tipo != 1">
+        <ion-item class="item-stable item item-button-right" style="background:#FFF" ng-class="{active: isGroupShown(ejercicio)}">
+           	<i class="icon" ng-click="toggleGroup(ejercicio)" ng-class="isGroupShown(ejercicio) ? 'ion-minus' : 'ion-plus'"></i>
+          	<span ng-click="toggleGroup(ejercicio)" > Ejercicio {{ejercicio.nombre}}</span>
+			<button class="button button-balanced icon-right" ng-click="ver(ejercicio)">
+		      <i class="ion-chevron-right" > Ver</i>
+		    </button>
+        </ion-item>
+        <ion-item class="item-accordion" ng-show="isGroupShown(ejercicio)">
+          	<span ng-if="ejercicio.parametros.sensibilidad>0">Sensibilidad sensor: {{ejercicio.parametros.sensibilidad}}</span>
+        </ion-item>
+        <ion-item class="item-accordion" ng-show="isGroupShown(ejercicio)">
+          Fecha: {{fechaToString(ejercicio.fecha)}}
+        </ion-item>
+         <ion-item class="item-accordion" ng-show="isGroupShown(ejercicio)"> 
+             <span ng-if="ejercicio.parametros.tiempo==0">Tiempo: Sin limite </span>
+             <span ng-if="ejercicio.parametros.tiempo>0">Tiempo: {{ejercicio.parametros.tiempo}}</span>
+        </ion-item> 
+      </div>
+    </ion-list>
+	<br />
+    <div class="text-right">
+        <a class="button button-positive icon-left ion-chevron-left" href="#/app/buscarResultados">
+			Volver
+        </a>
+        <button class="button button-positive icon-left ion-home" ng-click="continuar();">
+           	Inicio
+        </button>
+    </div>
+  </ion-content>
+</ion-view>

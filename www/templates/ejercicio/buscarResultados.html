@@ -1,0 +1,43 @@
+<ion-view view-title="">
+  <ion-content style="background-image:url('img/fondoApp.jpg');
+  background-size: cover;
+  ">
+    <h2 class="text-center padding">Resultados</h2>
+	<div style="  -moz-border-radius: 7px;-webkit-border-radius: 7px;padding: 10px;margin: 15px 5%;
+  background-color: rgba(255, 255, 255, .35);">
+    
+    <div style="background: rgba(0, 100, 255, 0.48);">
+      <div class="item item-icon-left">
+         <i class="icon ion-android-alert"></i><p>Opciónes de busqueda</p>
+      </div>
+    </div>
+<br />
+        <label class="item item-input item-select">
+          <div class="input-label">
+            Tipo ejercicio
+          </div>
+          <select ng-model="data.tipoEjercicio">
+            <option value="">Todos</option>
+            <option value="tipo1">Ejercicio 1</option>
+            <option value="tipo2">Ejercicio 2</option>
+            <option value="tipo3">Ejercicio 3</option>
+          </select>
+        </label>
+
+        <label class="item item-input">
+          <span class="input-label">Fecha inicio</span>
+          <input class="text-right" type="date" ng-model="data.fechaInicio">
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Fecha termino</span>
+          <input class="text-right" type="date" ng-model="data.fechaTermino" >
+        </label>
+<br />
+        <div class="text-right">
+          <button class="button button-positive icon-left ion-ios-search" ng-click="continuar();">
+            Buscar
+          </button>
+        </div>
+    </div>
+  </ion-content>
+</ion-view>

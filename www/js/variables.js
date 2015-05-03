@@ -10,7 +10,7 @@ $VERDADEROFALSO = 1;
 $ABIERTA = 2;
 $ALTERNATIVA = 3;
 
-
+/*
 $listaEjercicios = new Array();
   //ejercicio de preguntas
   ejercicio = new Object();
@@ -78,7 +78,7 @@ $listaEjercicios = new Array();
   ejercicio.datos.distancia = new Array();
   ejercicio.fecha = "Datos de fecha";
   $listaEjercicios.push(ejercicio);
-
+*/
 //ejercicios de mover mano
 /*  ejercicio = new Object();
   ejercicio.estado= $INCOMPLETED;

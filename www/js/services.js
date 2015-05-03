@@ -24,51 +24,54 @@ angular.module('starter.services', [])
     }
 })
 
-.factory('Chats', function() {
-  // Might use a resource here that returns a JSON array
-
-  // Some fake testing data
-  var chats = [{
-    id: 0,
-    name: 'Ben Sparrow',
-    lastText: 'You on your way?',
-    face: 'https://pbs.twimg.com/profile_images/514549811765211136/9SgAuHeY.png'
-  }, {
-    id: 1,
-    name: 'Max Lynx',
-    lastText: 'Hey, it\'s me',
-    face: 'https://pbs.twimg.com/profile_images/479740132258361344/KaYdH9hE.jpeg'
-  }, {
-    id: 2,
-    name: 'Andrew Jostlen',
-    lastText: 'Did you get the ice cream?',
-    face: 'https://pbs.twimg.com/profile_images/491274378181488640/Tti0fFVJ.jpeg'
-  }, {
-    id: 3,
-    name: 'Adam Bradleyson',
-    lastText: 'I should buy a boat',
-    face: 'https://pbs.twimg.com/profile_images/479090794058379264/84TKj_qa.jpeg'
-  }, {
-    id: 4,
-    name: 'Perry Governor',
-    lastText: 'Look at my mukluks!',
-    face: 'https://pbs.twimg.com/profile_images/491995398135767040/ie2Z_V6e.jpeg'
-  }];
+.factory('ejercicios', function() {
+  var f = new Date();
+  var listaEjercicios = [{
+      idResultadoSecion: 1,
+      idResultadoEjercicio: 1,
+      direccion: "app.cuestionario",
+      nombre:"Cuestionario",
+      estado: 0,
+      tipo: 1,
+      respuestas: [],
+      fecha: f,
+    },{
+      idResultadoSecion: 1,
+      idResultadoEjercicio: 2,
+      direccion:"app.ejercicioTemblor",
+      nombre:"Centrar Pelota 1",
+      estado:0,
+      tipo:2,
+      instrucciones:"(intrucciones 1)Mantenga la pelota en el centro de la patalla la mayor cantidad de tiempo posible",
+      parametros: 
+      {
+        sensibilidad:1,
+        tiempo:10,
+        tolerancia:30
+      },      
+      datos: {
+        tolerancia:5,
+        ejeX:[],
+        ejeY:[],
+        ejeZ:[],
+        distancia:[],
+      },
+      fecha: f,
+    }];
 
   return {
     all: function() {
-      return chats;
+      return listaEjercicios;
     },
-    remove: function(chat) {
-      chats.splice(chats.indexOf(chat), 1);
+    terminarEjercicio: function(num,estado){
+      listaEjercicios[num].estado=estado;
+      return true;
     },
-    get: function(chatId) {
-      for (var i = 0; i < chats.length; i++) {
-        if (chats[i].id === parseInt(chatId)) {
-          return chats[i];
-        }
-      }
-      return null;
+    buscar: function(tipoEjercicio,fechaInicio,fechaTermino){
+      return listaEjercicios;
+    },
+    buscaId: function(resultadoSecion,resultadoEjercicio){
+      return listaEjercicios[1];
     }
   }
 })

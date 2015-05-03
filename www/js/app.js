@@ -74,7 +74,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   })
 
   .state('app.resultado', {
-    url: "/resultado/:resultadoId",
+    cache: false,
+    url: "/resultado/:resultadoSecion/:resultadoEjercicio",
     views: {
       'menuContent': {
         templateUrl: "templates/resultado.html",
@@ -112,8 +113,28 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       }
     }
   })
+  .state('app.buscarResultados', {
+    url: "/buscarResultados",
+    cache: false,
+    views: {
+      'menuContent': {
+        templateUrl: "templates/ejercicio/buscarResultados.html",
+        controller: 'buscarResultados'
+      }
+    }
+  })
+  .state('app.listaResultados', {
+    url: "/listaResultados/:tipoEjercicio/:fechaInicio/:fechaTermino",
+    cache: false,
+    views: {
+      'menuContent': {
+        templateUrl: "templates/ejercicio/listaResultados.html",
+        controller: 'listaResultados'
+      }
+    }
+  })
   ;
-  //$urlRouterProvider.otherwise('/login');
-  $urlRouterProvider.otherwise('/app/rutinaEjercicios');
+  $urlRouterProvider.otherwise('/login');
+  //$urlRouterProvider.otherwise('/app/rutinaEjercicios');
 
 })

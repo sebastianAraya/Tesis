@@ -8,8 +8,6 @@
    <!--http://images.forwallpaper.com/files/images/d/d521/d5215ca5/465641/flow-of-orange-color.jpg
    -->
   <h2 class="text-center padding">Bienvenido Sebastián</h2>
-
-
     <div class="card" style="background: rgba(0, 100, 255, 0.48);">
       <div class="item item-icon-left">
          <i class="icon ion-android-alert"></i><p>Ésta es tú rutina de ejercicios para hoy</p>
@@ -18,7 +16,7 @@
 
     <div class="card" style="background: rgba(0, 100, 255, 0.48);">
     <ion-list>
-      <div ng-repeat="ejercicio in listaEjercicios" ng-if="ejercicio.tipo != 1">
+      <div ng-repeat="ejercicio in listaEjercicios" ng-if="ejercicio.tipo != 1 && ejercicio.estado != 1">
         <ion-item class="item-stable" style="background:#FFF" ng-click="toggleGroup(ejercicio)"
                   ng-class="{active: isGroupShown(ejercicio)}">
             <i class="icon" ng-class="isGroupShown(ejercicio) ? 'ion-minus' : 'ion-plus'"></i>

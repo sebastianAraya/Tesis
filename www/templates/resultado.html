@@ -1,12 +1,17 @@
 <ion-view ng-init="iniciar()">
-  <ion-content>
-    <h1>resultados</h1>
+  <ion-content style="background-image:url('img/fondoApp.jpg');background-size: cover;">
 
-<div id="editor-render-0" style="width: 90%; height:200px; margin: 0 auto;"></div>
+
+    <h1 class="text-center padding" >resultados</h1>
+
+ <div id="editor-render-0" style="width: 90%; height:200px; margin: 0 auto;"></div>
+
     <div class="text-right padding">
 	    <button class="button button-balanced" ng-click="continuar()">
-		  Continuar
+	    	{{esBusqueda() ? 'Volver' : 'Continuar'}}
 		</button>
 	</div>
+
+	
   </ion-content>
 </ion-view>

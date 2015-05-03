@@ -24,14 +24,21 @@ angular.module('starter.controllers',['ionic'])
    if( typeof($usuario)!= "undefined" && $usuario==1){
     }
     else{
-      $state.go('login');      
+ //     $state.go('login');      
     }
     $scope.porcentaje=50;
+    $scope.exit=function(){
+      navigator.app.exitApp();
+    }
 })
 
-.controller('PlaylistsCtrl', function($scope, $stateParams,$state,$ionicPopup) {
+.controller('PlaylistsCtrl', function($scope, $stateParams,$state,$ionicPopup,ejercicios) {
+  $listaEjercicios = ejercicios.all();
   $scope.listaEjercicios = $listaEjercicios;
+  console.log("estado 1: "+$listaEjercicios[0].estado);
+  console.log("estado 1: "+$listaEjercicios[1].estado);
   $numEjercicio = 0;
+
   $scope.comenzar = function(){
     calculaRuta($state);
   }
@@ -47,7 +54,7 @@ angular.module('starter.controllers',['ionic'])
   };
 })
 
-.controller('cuestionario', function($scope, $stateParams,$state,$ionicPopup) {
+.controller('cuestionario', function($scope, $stateParams,$state,$ionicPopup,ejercicios) {
   $scope.data = {respuesta1: ''};
   $scope.terminar = function() {
     if($scope.data.respuesta1 === ''){
@@ -56,7 +63,7 @@ angular.module('starter.controllers',['ionic'])
        })
     }
     else{
-      $listaEjercicios[0].estado=$COMPLETED;
+      ejercicios.terminarEjercicio($numEjercicio,$COMPLETED);
       calculaRuta($state);
     }
   };
@@ -64,47 +71,62 @@ angular.module('starter.controllers',['ionic'])
 
 .controller('ejercicioTemblor', function($scope, $stateParams,$state) {
   $scope.ejercicio = $listaEjercicios[$numEjercicio];
+
   $scope.continuar = function(){
     $state.go('app.ejercicioTemblorInstancia');
   }
 })
 
-.controller('ejercicioTemblorInstancia', function($scope, $stateParams,$state) {
+.controller('ejercicioTemblorInstancia', function($scope, $stateParams,$state,ejercicios) {
    $scope.iniciar = function(){
      preparacion();
      cuentaAtras($scope,5);     
    }
    $scope.comenzar = function(){
-      gelak($state);
-      cronometro($scope,$listaEjercicios[$numEjercicio].parametros.tiempo);
-   //cronometro($scope,2);
+   //   gelak($state);
+     // cronometro($scope,$listaEjercicios[$numEjercicio].parametros.tiempo);
+   cronometro($scope,2);
    }
    $scope.continuar = function(){
-     stopgelak();
-     $listaEjercicios[$numEjercicio].estado=$COMPLETED;
+   //  stopgelak();     
+      ejercicios.terminarEjercicio($numEjercicio,$COMPLETED);
      $state.go('app.resultado');
    }
 })
 
-.controller('Resultado', function($scope, $stateParams,$state) {
-  if($numEjercicio==-1)$state.go('app.playlists');
+.controller('Resultado', function($scope, $stateParams,$state,ejercicios, $ionicHistory) {
+  var ejercicio = null;
+
+  var esBusqueda =  true;
+  if( $stateParams.resultadoSecion=="" && $stateParams.resultadoEjercicio==""){
+ //   console.log("Mostrando resultado " +$stateParams.resultadoEjercicio+" - " +$stateParams.resultadoSecion);
+    ejercicio = $listaEjercicios[$numEjercicio];
+    esBusqueda =  false;
+    console.log('viene del ejercicio');
+  }
+  else{
+    console.log('viene de busqueda');
+    ejercicio = ejercicios.buscaId($stateParams.resultadoSecion,$stateParams.resultadoEjercicio);
+  }
+
+  $scope.esBusqueda = function(){
+    return esBusqueda;
+  }
 
   $scope.iniciar = function(){
       (function mouse_zoom(container) {
       var options, graph;
-         
-      options = {
-        selection : { mode : 'x', fps : 30 },
+        options = { selection : { mode : 'x', fps : 30 },
       };
         var d1 = [];
 
-        d1.push([0, ($listaEjercicios[$numEjercicio].parametros.tolerancia / 2 ) ]);
-        d1.push([$listaEjercicios[$numEjercicio].parametros.tiempo, ($listaEjercicios[$numEjercicio].parametros.tolerancia / 2) ]);
+        d1.push([0, (ejercicio.parametros.tolerancia / 2 ) ]);
+        d1.push([ejercicio.parametros.tiempo, (ejercicio.parametros.tolerancia / 2) ]);
 
       function drawGraph (opts) {
         var o = Flotr._.extend(Flotr._.clone(options), opts || {});
                return Flotr.draw(container,[ 
-                { data : $listaEjercicios[$numEjercicio].datos.distancia},
+                { data : ejercicio.datos.distancia},
                 { data : d1, lines : {fill : true}} ], o );
        // return Flotr.draw(container,[{ data : d1, label : 'O' }, d2,d3], o );
       }
@@ -122,7 +144,12 @@ angular.module('starter.controllers',['ionic'])
 
   }
   $scope.continuar = function(){
-      calculaRuta($state);
+      if(esBusqueda){
+         $ionicHistory.goBack();
+      }
+      else{
+        calculaRuta($state);
+      }
   }
 })
 
@@ -130,9 +157,43 @@ angular.module('starter.controllers',['ionic'])
    $scope.continuar = function(){
       $state.go('app.playlists');
   }
+})
 
-});
+.controller('buscarResultados', function($scope, $stateParams,$state) {
+  var fechaHOY = new Date();
+  $scope.data = {tipoEjercicio:'',fechaInicio: fechaHOY, fechaTermino: fechaHOY};
+  $scope.continuar = function(){
+      $state.go('app.listaResultados', {tipoEjercicio: $scope.data.tipoEjercicio ,fechaInicio: $scope.data.fechaInicio,fechaTermino: $scope.data.fechaTermino} );
+  }
+})
+.controller('listaResultados', function($scope, $stateParams,$state,ejercicios) {
+  $scope.fechaToString = function toString(fecha){
+    return fechaInicio.getDate() + "/" + (fechaInicio.getMonth() +1) + "/" + fechaInicio.getFullYear();
+  }
+  var fechaInicio = new Date($stateParams.fechaInicio);
+  var fechaTermino = new Date($stateParams.fechaTermino);
+  var tipoEjercicio = $stateParams.tipoEjercicio;
 
+  $scope.listaEjercicios = ejercicios.buscar(tipoEjercicio,fechaInicio,fechaTermino);
+
+  $scope.ver=function(ejercicio){
+      $state.go('app.resultado',{resultadoSecion:ejercicio.idResultadoSecion , resultadoEjercicio:ejercicio.idResultadoEjercicio});
+  }
+  $scope.continuar = function(){
+      $state.go('app.playlists');
+  };
+  $scope.toggleGroup = function(group) {
+    if ($scope.isGroupShown(group)) {
+      $scope.shownGroup = null;
+    } else {
+      $scope.shownGroup = group;
+    }
+  };
+  $scope.isGroupShown = function(group) {
+    return $scope.shownGroup === group;
+  };
+})
+;
 calculaRuta= function($state){
  /* $numEjercicio = 1;
   $state.go('app.resultado');
