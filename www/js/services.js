@@ -24,19 +24,50 @@ angular.module('starter.services', [])
     }
 })
 
-.factory('ejercicios', function() {
+.factory('User', function(DB) {
+    var self = this;
+    
+    self.all = function() {
+        return DB.query('SELECT * FROM usuario')
+        .then(function(result){
+            return DB.fetchAll(result);
+        });
+    };
+    
+    self.newUser = function(usuario,contraseña){
+        return DB.query('INSERT INTO usuario (usuario,contraseña) VALUES (?,?) ',[usuario],[contraseña])
+        .then(function(result){
+            return DB.fetch(result);
+        })    
+    };
+    self.getById = function(id) {
+        return DB.query('SELECT * FROM usuario WHERE id = ?', [id])
+        .then(function(result){
+            return DB.fetch(result);
+        });
+    };
+    
+    self.getByNombrePassword = function(nombre,contraseña) {
+        return DB.query('SELECT * FROM usuario WHERE nombre = ? AND contraseña = ?', [nombre],[contraseña])
+        .then(function(result){
+            return DB.fetch(result);
+        });
+    };
+    return self;
+})
+
+.factory('ejercicios', function($cordovaSQLite,RutinaPorDefecto) {
+
   var f = new Date();
-  var listaEjercicios = [{
-      idResultadoSecion: 1,
+ /* var listaEjercicios = [{
       idResultadoEjercicio: 1,
       direccion: "app.cuestionario",
       nombre:"Cuestionario",
       estado: 0,
       tipo: 1,
-      respuestas: [],
+      datos: [],
       fecha: f,
     },{
-      idResultadoSecion: 1,
       idResultadoEjercicio: 2,
       direccion:"app.ejercicioTemblor",
       nombre:"Centrar Pelota 1",
@@ -46,7 +77,7 @@ angular.module('starter.services', [])
       parametros: 
       {
         sensibilidad:1,
-        tiempo:10,
+        tiempo:30,
         tolerancia:30
       },      
       datos: {
@@ -58,9 +89,20 @@ angular.module('starter.services', [])
       },
       fecha: f,
     }];
+   */ var listaEjercicios = [];
 
+  console.log( "lista ejercicio = " +listaEjercicios.length);
   return {
     all: function() {
+
+console.log(JSON.stringify($usuario));
+console.log("busca rutina")
+var f = new Date();
+var g = f.getFullYear()+"-"+(f.getMonth() +1)+"-"+f.getDate();
+var query = "SELECT * FROM rutina WHERE fecha='"+g+"'";
+
+
+      
       return listaEjercicios;
     },
     terminarEjercicio: function(num,estado){
@@ -76,6 +118,39 @@ angular.module('starter.services', [])
   }
 })
 
+.factory('RutinaPorDefecto',function($cordovaSQLite){
+    var f = new Date();
+    
+    return {
+      generarRutina: function($state){
+
+        for (var i = 0; i < listaEjerciciosDefault.length; i++) {
+            var f = new Date();
+            var tipo_ejercicio = listaEjerciciosDefault[i].tipo;
+            var fecha = f.getFullYear()+"-"+(f.getMonth() +1)+"-"+f.getDate();
+            var estado = listaEjerciciosDefault[i].estado;
+            var instrucciones = new Object();
+            instrucciones.instrucciones = listaEjerciciosDefault[i].instrucciones;
+            instrucciones.direccion = listaEjerciciosDefault[i].direccion;
+            instrucciones.nombre=listaEjerciciosDefault[i].nombre;
+            instrucciones.parametros = listaEjerciciosDefault[i].parametros;
+            var resultados = JSON.stringify(listaEjerciciosDefault[i].datos);
+
+            var query = "INSERT INTO rutina (id_usuario,estado,tipo_ejercicio,fecha,instrucciones,resultados) VALUES (?,?,?,?,?,?)" ;
+            $cordovaSQLite.execute(db, query, [$usuario.id_usuario,estado,tipo_ejercicio,fecha,JSON.stringify(instrucciones),resultados]).then(function(res) {
+                console.log("Se ha creado una rutina");
+            }, function (err) {
+                console.error("Error con Base de datos crear rutina: "+JSON.stringify(err));
+            });
+
+        }
+        $state.go('app.playlists' )
+        ;
+        console.log("Se ha creado toda la rutina");
+
+      }
+    }
+})
 /**
  * A simple example service that returns some data.
  */

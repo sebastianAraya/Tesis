@@ -16,20 +16,20 @@
 
   <ion-side-menu side="right">
     <ion-header-bar class="bar-stable bar-dark">
-      <h1 class="title">Left</h1>
+      <h1 class="title">Menú</h1>
     </ion-header-bar>
     <ion-content>
       <ion-list>
-        <ion-item nav-clear menu-close ng-click="#/login">
-          Perfil
+        <ion-item nav-clear menu-close href="#/app/rutinaEjercicios">
+          Inicio
         </ion-item>
-        <ion-item nav-clear menu-close href="#/app/resultados">
+        <ion-item nav-clear menu-close href="#/app/buscarResultados">
           Resultados
         </ion-item>
         <ion-item nav-clear menu-close href="#/login">
           Cambiar de usuario
         </ion-item>
-        <ion-item nav-clear menu-close href="/#/login">
+        <ion-item nav-clear menu-close ng-click="exit();">
           Salir
         </ion-item>
       </ion-list>

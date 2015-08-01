@@ -10,6 +10,166 @@ $VERDADEROFALSO = 1;
 $ABIERTA = 2;
 $ALTERNATIVA = 3;
 
+$listaEjercicios=[];
+$listaEjerciciosDefault = [{
+      idResultadoEjercicio: 1,
+      id_seccion:0,
+      direccion: "app.cuestionario",
+      nombre:"Cuestionario",
+      estado: 0,
+      tipo:1,
+      instrucciones:"",
+      parametros:{},
+      datos: {respuesta:[]}
+    },{
+      idResultadoEjercicio: 2,
+      id_seccion:0,
+      direccion:"app.ejercicioCadenciaInstrucciones",
+      nombre:"rigidez",
+      estado:0,
+      tipo:4,
+      instrucciones:"instrucciones rigidez",
+      parametros: 
+      {
+        sensibilidad:1,
+        tiempo:10,
+        tolerancia:30
+      },      
+      datos: {
+        tolerancia:5,
+        ejeX:[],
+        ejeY:[],
+        ejeZ:[],
+        distancia:[],
+      }
+    },{
+      idResultadoEjercicio: 2,
+      id_seccion:0,
+      direccion:"app.ejercicioCadenciaInstrucciones",
+      nombre:"rigidez",
+      estado:0,
+      tipo:4,
+      instrucciones:"instrucciones rigidez",
+      parametros: 
+      {
+        sensibilidad:1,
+        tiempo:10,
+        tolerancia:30
+      },      
+      datos: {
+        tolerancia:5,
+        ejeX:[],
+        ejeY:[],
+        ejeZ:[],
+        distancia:[],
+      }
+    },{
+      idResultadoEjercicio: 2,
+      id_seccion:0,
+      direccion:"app.ejercicioCadenciaInstrucciones",
+      nombre:"rigidez",
+      estado:0,
+      tipo:4,
+      instrucciones:"instrucciones rigidez",
+      parametros: 
+      {
+        sensibilidad:1,
+        tiempo:10,
+        tolerancia:30
+      },      
+      datos: {
+        tolerancia:5,
+        ejeX:[],
+        ejeY:[],
+        ejeZ:[],
+        distancia:[],
+      }
+    },{
+      idResultadoEjercicio: 2,
+      id_seccion:0,
+      direccion:"app.ejercicioRigidezInstrucciones",
+      nombre:"rigidez",
+      estado:0,
+      tipo:3,
+      instrucciones:"instrucciones rigidez",
+      parametros: 
+      {
+        sensibilidad:1,
+        tiempo:10,
+        tolerancia:30
+      },      
+      datos: {
+        tolerancia:5,
+        ejeX:[],
+        ejeY:[],
+        ejeZ:[],
+        distancia:[],
+      }
+    },{
+      idResultadoEjercicio: 2,
+      id_seccion:0,
+      direccion:"app.ejercicioRigidezInstrucciones",
+      nombre:"rigidez",
+      estado:0,
+      tipo:3,
+      instrucciones:"instrucciones rigidez",
+      parametros: 
+      {
+        sensibilidad:1,
+        tiempo:10,
+        tolerancia:30
+      },      
+      datos: {
+        tolerancia:5,
+        ejeX:[],
+        ejeY:[],
+        ejeZ:[],
+        distancia:[],
+      }
+    },{
+      idResultadoEjercicio: 2,
+      id_seccion:0,
+      direccion:"app.ejercicioRigidezInstrucciones",
+      nombre:"rigidez",
+      estado:0,
+      tipo:3,
+      instrucciones:"instrucciones rigidez",
+      parametros: 
+      {
+        sensibilidad:1,
+        tiempo:10,
+        tolerancia:30
+      },      
+      datos: {
+        tolerancia:5,
+        ejeX:[],
+        ejeY:[],
+        ejeZ:[],
+        distancia:[],
+      }
+    },{
+      idResultadoEjercicio: 2,
+      id_seccion:0,
+      direccion:"app.ejercicioRigidezInstrucciones",
+      nombre:"Centrar Pelota defecto 2",
+      estado:0,
+      tipo:3,
+      instrucciones:"(instrucciones 1)Mantenga la pelota en el centro de la patalla la mayor cantidad de tiempo posible",
+      parametros: 
+      {
+        sensibilidad:1,
+        tiempo:13,
+        tolerancia:30
+      },      
+      datos: {
+        tolerancia:5,
+        ejeX:[],
+        ejeY:[],
+        ejeZ:[],
+        distancia:[],
+      }
+    }];
+
 /*
 $listaEjercicios = new Array();
   //ejercicio de preguntas

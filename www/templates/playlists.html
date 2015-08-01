@@ -16,14 +16,17 @@
 
     <div class="card" style="background: rgba(0, 100, 255, 0.48);">
     <ion-list>
-      <div ng-repeat="ejercicio in listaEjercicios" ng-if="ejercicio.tipo != 1 && ejercicio.estado != 1">
+      <div ng-repeat="ejercicio in listEjercicios" ng-if="ejercicio.tipo != 1 && ejercicio.estado != 1">
         <ion-item class="item-stable" style="background:#FFF" ng-click="toggleGroup(ejercicio)"
                   ng-class="{active: isGroupShown(ejercicio)}">
             <i class="icon" ng-class="isGroupShown(ejercicio) ? 'ion-minus' : 'ion-plus'"></i>
           &nbsp;
-          Ejercicio {{ejercicio.nombre}}
+          {{ejercicio.nombre}}
         </ion-item>
         <ion-item class="item-accordion" ng-show="isGroupShown(ejercicio)">
+          Identificador: {{ ejercicio.idResultadoEjercicio}}
+        </ion-item>
+         <ion-item class="item-accordion" ng-show="isGroupShown(ejercicio)">
           Sensibilidad sensor: {{ejercicio.parametros.sensibilidad}}
         </ion-item>
 
@@ -42,8 +45,6 @@
     
   </ion-content>    
     
-    <div class="bar bar-footer" style="background-color: rgba(255, 255, 255, 0.3);">
-      <progress max="100" value={{porcentaje}}></progress>  
-    </div>
+    
 
 </ion-view>
