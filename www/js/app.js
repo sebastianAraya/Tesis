@@ -13,13 +13,13 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
                 // org.apache.cordova.statusbar required
                 StatusBar.styleDefault();
             }
-            window.plugins.sqlDB.copy("Moto-DB.db", function() {
+       /*     window.plugins.sqlDB.copy("Moto-DB.db", function() {
                 db = $cordovaSQLite.openDB("Moto-DB.db");
             }, function(error) {
                 console.error("Ya se copio ");
                 db = $cordovaSQLite.openDB("Moto-DB.db");
             });
-
+*/
         });
     })
 
@@ -183,7 +183,22 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
                 controller: 'ejercicioCadencia'
             }
         }
-    });
+    })
+    .state('app.todos',{
+           url:'/Pacientes',
+           controller:'PacienteListController',
+           templateUrl:'templates/gestionPacientes/todos.html'
+        })
+    .state('app.createTodo',{
+            url:'/Paciente/new',
+            controller:'PacientesCreationController',
+            templateUrl:'templates/gestionPacientes/create-todo.html'
+        })
+    .state('app.editTodo',{
+            url:'/Paciente/edit/:id/:content',
+            controller:'PacientesEditController',
+            templateUrl:'templates/gestionPacientes/edit-todo.html'
+        });
     $urlRouterProvider.otherwise('/login');
     //$urlRouterProvider.otherwise('/app/rutinaEjercicios');
 
